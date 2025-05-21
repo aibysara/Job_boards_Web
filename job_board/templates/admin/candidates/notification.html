@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %} Contact Page {% endblock %}
+{% block content %}
+{% load static %}
+
+
+
+
+<div class="clearfix"></div>
+
+
+
+
+<section class="contact">
+
+
+
+
+    <div class="container-fluid">
+
+
+        <div class="row">
+
+            {% include 'admin_sidemenu.html' %}
+
+            <div class="col-md-10 bg_color">
+
+
+              <div class="home_content_area">
+                    <h2>Your Notifications</h2>
+                    {% if notifications %}
+                    {% for notification in notifications %} 
+                    <div class=" fade show  alert-box">
+                      <b> {{ notification.message }}</b> <br>-<em>{{ notification.created_at }}</em> 
+                    
+                    </div>
+                    {% endfor %}
+
+                    {% else %}
+                    <p>No new notifications.</p>
+                    {% endif %}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

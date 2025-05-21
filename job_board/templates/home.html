@@ -1,0 +1,396 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/mdi/css/materialdesignicons.min.css' %}">
+
+
+</head>
+
+<body>
+
+  <div class="cover-container">
+
+    <div class="d-flex w-100 h-100   mx-auto flex-column">
+
+      <header class=" ">
+
+        <nav class="navbar navbar-expand-lg  " aria-label="Eleventh navbar example">
+          <div class="container">
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+              <img src="{% static 'img/logo.png' %}">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
+              aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample09">
+              <ul class="navbar-nav main_navbar me-auto mb-2 mb-lg-0">
+                <li><a href="/" class="nav-link px-0">Home</a></li>
+                <li><a href="{% url 'job_listing' %}"
+                    class="nav-link px-0 {% if request.path == '/job_listing/' %}active{% endif %}">Find a Job</a></li>
+
+                <li><a href="{% url 'employers' %}"
+                    class="nav-link px-0 {% if request.path == '/employers/' %}active{% endif %}">Employers</a></li>
+                <li><a href="{% url 'candidates' %}"
+                    class="nav-link px-0 {% if request.path == '/candidates/' %}active{% endif %}">Candidates</a></li>
+                <li><a href="{% url 'about' %}"
+                    class="nav-link  px-0 {% if request.path == '/about/' %}active{% endif %}">About</a></li>
+
+                <li><a href="{% url 'contact' %}"
+                    class="nav-link px-0 {% if request.path == '/contact/' %}active{% endif %}">Contact</a></li>
+              </ul>
+
+            </div>
+            <div class="col-md-2 text-end  float-end">
+
+              {% if user.is_authenticated %}
+              <ul class=" nav  justify-content-end">
+                <li class="nav-item dropdown">
+                  <a class="btn btn-outline-light me-2  dropdown-toggle" type="button" href="#"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+
+                    <span class="mdi mdi-account-outline"></span> </a>
+
+
+                  <ul class="dropdown-menu ">
+
+                    {% if user.is_authenticated %}
+                    {% if is_applicant %}
+                    <li> <a href="{% url 'user_homepage' %}"
+                        class="list-group-item list-group-item-action d-flex gap-3  dropdown-item" aria-current="true"
+                        style=" padding: 20px;  ">
+                        <!-- <img src="{{ applicant.image.url}}" alt="twbs" width="32" height="32"
+                        class="rounded-circle flex-shrink-0"> -->
+                        <div class="d-flex gap-2 w-100 justify-content-between">
+                          <div>
+                            <h6 class="mb-0"> {{user.first_name }} {{user.last_name }} </h6>
+                            <p class="mb-0 opacity-75">Its Candidates </p>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'user_profile' %}">
+                        <span class="mdi mdi-account-outline"></span>
+                        View Profile
+                      </a>
+                    </li>
+
+                    {% elif is_company %}
+                    <li> <a href="{% url 'company_homepage' %}"
+                        class="list-group-item list-group-item-action d-flex gap-3  dropdown-item" aria-current="true"
+                        style=" padding: 20px;  ">
+                        <!-- <img src="{{ user.image.url}}" alt="twbs" width="32" height="32"
+                        class="rounded-circle flex-shrink-0"> -->
+                        <div class="d-flex gap-2 w-100 justify-content-between">
+                          <div>
+                            <h6 class="mb-0">{{ user.username }} </h6>
+                            <p class="mb-0 opacity-75">Its Company </p>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'company_profile' %}">
+                        <span class="mdi mdi-account-outline"></span>
+                        View Profile
+                      </a>
+                    </li>
+
+                    {% endif %}
+
+                    {% endif %}
+                    <li>
+                      <a class=" me-2 btn " href="{% url 'notification' %}">
+                        <span class="mdi mdi-bell"></span> Notifications
+                      </a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                      <a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}">
+                        <span class="mdi mdi-logout"></span>
+                        logout
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+         
+              </ul>
+              {% else %}
+              <a type="button" href="{% url 'login' %}" class="btn btn-outline-light me-2">Login / Sign-up</a>
+              {% endif %}
+            </div>
+          </div>
+        </nav>
+
+      </header>
+
+
+      <main class="px-3">
+
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-7 job-left page_hd">
+              <h1>Find Your Perfect Dream Job </h1>
+              <p>Looking for a new job can be both exciting and daunting. Navigating the job market involves exploring
+                various avenues, including online job board
+              </p>
+
+
+
+
+              <div class="card search-form">
+                <div class="card-body p-0">
+                  <form method="GET" action="{% url 'search_results' %}">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="row no-gutters">
+                          <div class="col-lg-10 col-md-9 col-sm-12">
+                            <input type="text" placeholder="Search..." class="form-control"
+                              value="{{ query|default:'' }}" name="q">
+                          </div>
+                        
+
+                          <div class="col-lg-2 col-md-3 col-sm-12 ">
+
+                            <button type="submit" class="btn btn-base">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-search">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+
+
+              <div class="content-trending">
+                <ul class="nav search_items">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Popular Searches :</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Designer</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Developer</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " aria-disabled="true">Web</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " aria-disabled="true">IOS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " aria-disabled="true">PHP</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " aria-disabled="true">Engineer</a>
+                  </li>
+
+
+
+
+                </ul>
+
+              </div>
+
+
+
+            </div>
+            <div class="col-md-5">
+
+              <img src="{% static 'img/women2.png' %}" class="img-fluid">
+
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </main>
+
+
+    </div>
+  </div>
+
+
+  <div class="clearfix"></div>
+
+
+  <section class="joblist">
+
+    <div class="container">
+
+
+
+
+      <div class="row">
+
+        <section class="featured-job-area feature-padding">
+          <div class="container">
+            <!-- Section Tittle -->
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="section-tittle text-center">
+                  <span>Recent Job</span>
+                  <h2>Featured Jobs</h2>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-xl-10">
+
+                {% for job in jobs %}
+                <!-- single-job-content -->
+                <div class="single-job-items mb-30">
+                  <div class="job-items">
+                    <div class="company-img">
+                      <a href="/job_details/{{ job.id }}/"><img src="{{job.image.url}}" alt="{{ job.title }}"></a>
+                    </div>
+                    <div class="job-tittle job-tittle2">
+                      <a href="/job_details/{{ job.id }}/">
+                        <h4>{{ job.title }}</h4>
+                      </a>
+                      <ul>
+                        <li>{{job.company.company_name}}</li>
+                        <li><i class="fas fa-map-marker-alt"></i>{{job.location}}</li>
+                        <li>₹{{job.salary}}/month</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="items-link items-link2 f-right">
+                    <a href="/job_details/{{ job.id }}/">{{job.job_type}}</a>
+                    <span>{{job.creation_date}}</span>
+                  </div>
+                </div>
+                <!-- single-job-content -->
+                {% endfor %}
+                <div class="d-grid gap-2 col-md-4 col-sm-12 col-lg-3 mx-auto">
+                  <a class=" btn add_btn " href="{% url 'job_listing' %}" type="button">Browse More Jobs</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+  </section>
+
+
+  <div class="apply-process-area apply-bg pt-150 pb-150" data-background="{% static 'img/how-applybg.png' %}">
+    <div class="container">
+      <!-- Section Tittle -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-tittle white-text text-center">
+            <span>Apply process</span>
+            <h2> How it works</h2>
+          </div>
+        </div>
+      </div>
+      <!-- Apply Process Caption -->
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="single-process text-center mb-30">
+            <div class="process-ion">
+              <span class="flaticon-search"></span>
+            </div>
+            <div class="process-cap">
+              <h5>1. Search a job</h5>
+              <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="single-process text-center mb-30">
+            <div class="process-ion">
+              <span class="flaticon-curriculum-vitae"></span>
+            </div>
+            <div class="process-cap">
+              <h5>2. Apply for job</h5>
+              <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="single-process text-center mb-30">
+            <div class="process-ion">
+              <span class="flaticon-tour"></span>
+            </div>
+            <div class="process-cap">
+              <h5>3. Get your job</h5>
+              <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="online-cv cv-bg section-overly pt-90 pb-120" data-background="{% static 'img/cv_bg.jpg' %}">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-10">
+          <div class="cv-caption text-center">
+            <p class="pera1">FEATURED TOURS Packages</p>
+            <p class="pera2"> Make a Difference with Your Online Resume!</p>
+            <a href="#" class="border-btn2 border-btn4">Upload your cv</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+   {% include 'footer.html' %}
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

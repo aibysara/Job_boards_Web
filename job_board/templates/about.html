@@ -1,0 +1,61 @@
+ {% extends 'base.html' %}
+ {% block title %} About Page {% endblock %}
+ {% block content %}
+ {% load static %}
+    <div class="slider-area ">
+      <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="/static/img/about.jpg" style="background-image: url(&quot;/static/img/about.jpg&quot;);">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="hero-cap text-center">
+                <h2>About us</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="clearfix"></div>
+  
+    <div class="support-company-area fix section-padding2">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-xl-6 col-lg-6">
+                  <div class="right-caption">
+                      <!-- Section Tittle -->
+                      <div class="section-tittle section-tittle2">
+                          <span>What we are doing</span>
+                          <h2>24k Talented people are getting Jobs</h2>
+                      </div>
+                      <div class="support-caption">
+                          <p class="pera-top">Mollit anim laborum duis au dolor in voluptate velit ess cillum dolore eu lore dsu quality mollit anim laborumuis au dolor in voluptate velit cillum.</p>
+                          <p>Mollit anim laborum.Duis aute irufg dhjkolohr in re voluptate velit esscillumlore eu quife nrulla parihatur. Excghcepteur signjnt occa cupidatat non inulpadeserunt mollit aboru. temnthp incididbnt ut labore mollit anim laborum suis aute.</p>
+                          
+
+                          {% if user.is_authenticated %}
+                            {% if is_applicant %}
+                                <a href="{% url 'job_listing'%}" class="btn  post-btn">Apply Now</a>
+                            {% else %}
+                            <a href="{% url 'add_job'%}" class="btn post-btn">Post a job</a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'login' %}" class="btn post-btn">Login to Apply</a>
+                        {% endif %}
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-6 col-lg-6">
+                  <div class="support-location-img">
+                      <img src="/static/img/support-img.jpg" alt="">
+                      <div class="support-img-cap text-center">
+                          <p>Since</p>
+                          <span>1994</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+ {% endblock %}

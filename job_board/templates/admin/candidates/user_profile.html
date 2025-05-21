@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% block title %} Contact Page {% endblock %}
+{% block content %}
+{% load static %}
+
+
+
+<section class="contact">
+  <div class="container-fluid">
+
+
+    <div class="row">
+
+      {% include 'admin_sidemenu.html' %}
+
+      <div class="col-md-10 bg_color">
+        <div class="content_area">
+          {% if messages %}
+          <div class="messages position-fixed   top-0 end-0  p-3" style="z-index: 1100;">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <h4>Update Profile</h4>
+          <form class="container mt-4 " method="POST" enctype="multipart/form-data">
+            <div class="row">
+
+              <div class="col-sm-3">
+                {% if candidate.image %}
+                <img src="{{applicant.image.url}}" alt="" class="img-fluid">
+               {% else %} 
+               <img src="/../static/img/user.png" alt="Image" class="img-fluid"></a> 
+               {% endif %}
+           
+                <div class="form-group">
+                  <label>Profile Photo</label>
+                  <input type="file" class="form-control mt-2" name="image" id="image">
+                </div>
+              </div>
+              <div class="col-sm-9">
+
+                {% csrf_token %}
+
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label>First Name</label>
+                    <input type="text" class="form-control mt-2" name="first_name" id="first_name"
+                      value="{{applicant.user.first_name}}" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control mt-2" name="last_name" id="last_name"
+                      value="{{applicant.user.last_name}}" required>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label>Username</label>
+                    <input type="text" class="form-control mt-2" name="username" id="username"
+                      value="{{applicant.user.username}}" readonly>
+                  </div>
+                </div>
+
+                <div class="row mt-4">
+                  <div class="form-group col-md-6">
+                    <label>Email Id</label>
+                    <input type="email" class="form-control mt-2" name="email" id="email"
+                      value="{{applicant.user.email}}" required readonly>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Contact Number</label>
+                    <input type="tel" class="form-control mt-2" name="phone" id="phone" value="{{applicant.phone}}"
+                      required>
+                  </div>
+                </div>
+
+                <div class="row mt-4">
+                  <div class="form-group col-md-6">
+                    <label>Gender</label>
+                    {% if applicant.gender == "Male" %}
+                    <div class="mt-2">
+                      <div class="form-check form-check-inline">
+                        <input type="radio" class="custom-control-input" name="gender" value="Male" checked>
+                        <label for="male" class="custom-control-label">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input type="radio" class="custom-control-input" name="gender" value="Female">
+                        <label for="female" class="custom-control-label">Female</label>
+                      </div>
+                    </div>
+                    {% else %}
+                    <div>
+                      <div class="form-check form-check-inline">
+                        <input type="radio" class="custom-control-input" name="gender" value="Male">
+                        <label for="male" class="custom-control-label">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input type="radio" class="custom-control-input" name="gender" value="Female" checked>
+                        <label for="female" class="custom-control-label">Female</label>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
+                <div class="form-group col-md-6"> 
+                    <label>Location</label>
+                    <input type="tel" class="form-control mt-2" name="location" id="location" value="{{applicant.location}}"
+                      required>
+                  </div>
+                  
+
+                </div>
+   
+              </div>
+              <div class="col-sm-12">
+
+                <div class="row mt-4">
+                  <div class="form-group col-md-4">
+                    <label>Work Experience</label>
+                    <input type="text" class="form-control mt-2" name="work" id="work" value="{{applicant.work}}">
+                  </div>
+                  <div class="form-group col-md-4 ">
+                    <label>Completion year (or expected)</label>
+
+                    <input type="text" class="form-control mt-2" name="year" id="year" value="{{applicant.year}}">
+                  </div>
+                </div>
+
+                <!-- Job Type Section -->
+                <div class="row mt-4 form-group">
+                  <div class="form-group col-md-6">
+                    <label class="col-lg-12">Education</label> 
+
+                    <input type="radio" class="btn-check" name="education_level" id="diploma" value="Diploma" autocomplete="off"
+                    {% if applicant.education_level == "Diploma" %} checked {% endif %}>
+                  <label class="btn" for="diploma">Diploma</label>
+                  
+                  <input type="radio" class="btn-check" name="education_level" id="graduate" value="Graduate" autocomplete="off"
+                    {% if applicant.education_level == "Graduate" %} checked {% endif %}>
+                  <label class="btn" for="graduate">Graduate</label>
+                  
+                  <input type="radio" class="btn-check" name="education_level" id="post_graduate" value="Post Graduate" autocomplete="off"
+                    {% if applicant.education_level == "Post Graduate" %} checked {% endif %}>
+                  <label class="btn" for="post_graduate">Post Graduate</label>
+                  
+                  <input type="radio" class="btn-check" name="education_level" id="iti" value="ITI" autocomplete="off"
+                    {% if applicant.education_level == "ITI" %} checked {% endif %}>
+                  <label class="btn" for="iti">ITI</label>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="form-group col-md-7">
+                      <label>About</label>
+                      <textarea name="about" id="about" class="form-control" cols="30" rows="5"
+                        placeholder="Description of the exact job">{{ applicant.about }}</textarea>
+                    </div>
+                    <div class="col-md-5"> 
+                    <div class="form-group ">
+                      {% if applicant.cv %}
+                          <label>Current CV:</label> <a href="{{ applicant.cv.url }}" target="_blank" class="text-danger">
+                            <i class="bi bi-filetype-pdf"></i> Download CV</a>
+                      {% endif %}
+                  </div>
+
+                  <div class="form-group  mt-3">
+                        <label for="cv">Upload CV</label>
+                        <input type="file" name="cv" class="form-control" accept=".pdf,.doc,.docx">
+                        <!-- Display errors related to 'cv' upload -->
+                        {% if form.cv.errors %}
+                            <div class="text-danger">
+                                {{ form.cv.errors }}
+                            </div>
+                        {% endif %}
+
+                  </div>
+                    </div>
+                  </div>
+                </div>
+           
+             
+              
+             
+              </div>
+
+
+              
+              </div>
+
+
+            <button type="submit" class="btn btn-primary   mt-4">Save Update</button>
+
+
+            </div>
+
+
+      
+        </form>
+       </div>
+
+
+
+     
+      </div>
+
+
+    </div>
+
+  </div>
+  </div>
+</section>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,91 @@
+<div class="col-lg-2  bg-body-sidemenu">
+  <!-- Check if the user is an Applicant -->
+
+  {% if user.is_authenticated %}
+  {% if is_applicant %}
+
+
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="profile">
+      <h4 class="mb-0"> {{user.first_name }} {{user.last_name }} </h4>
+      <p class="mb-0 opacity-75">Its Candidates </p>
+    </div>
+<hr>
+    <a class=" link-button {% if request.path == '/user_homepage/' %}active{% endif %}" type="button"
+      href="{% url 'user_homepage' %}"> <span class="contact-info__icon"><i class="bi bi-house"></i></span>
+      Dashboard
+    </a>
+
+    <a class=" link-button {% if request.path == '/notification/' %}active{% endif %}" type="button"
+      href="{% url 'notification' %}"> <span class="contact-info__icon"><i class="mdi mdi-bell"></i></span>
+      Notifications
+    </a>
+
+    <a class=" link-button {% if request.path == '/applied_jobs/' %}active{% endif %}" type="button"
+      href="{% url 'applied_jobs' %}"> <span class="contact-info__icon"><i
+          class="mdi mdi-briefcase-variant-outline"></i></span>
+      Applied Jobs
+    </a>
+
+    <a class=" link-button {% if request.path == '/user_profile/' %}active{% endif %}" type="button"
+      href="{% url 'user_profile' %}"> <span class="contact-info__icon"><i class="mdi mdi-account-outline"></i></span>
+      View & Update Profile
+    </a>
+
+    <a class=" link-button {% if request.path == '/settings/' %}active{% endif %}" type="button"
+      href="{% url 'settings' %}"> <span class="contact-info__icon"><i class="mdi mdi-account-outline"></i></span>
+      Settings
+    </a>
+  </div>
+
+  {% elif is_company %}
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div>
+      <h4 class="mb-0">{{ user.username }} </h4>
+      <p class="mb-0 opacity-75">Its Company </p>
+    </div>
+    <hr>
+    <a class=" link-button {% if request.path == '/company_homepage/' %}active{% endif %}" type="button"
+      href="{% url 'company_homepage' %}"> <span class="contact-info__icon"><i class="bi bi-house"></i></span>
+      Dashboard
+    </a>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+
+          <span class="contact-info__icon"><span class="mdi mdi-briefcase-variant-outline"></span></span> Jobs
+        </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <ul class="submenu">
+            <li><a href="{% url 'add_job' %}">
+                <span class="mdi mdi-circle-medium"></span> Add Jobs</a></li>
+            <li><a href="{% url 'job_list' %}">
+                <span class="mdi mdi-circle-medium"></span> View Jobs</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a class="link-button {% if request.path == '/all_applicants/' %}active{% endif %}"
+      href="{% url 'all_applicants' %}" type="button"> <span class="contact-info__icon"><i
+          class="bi bi-person-lines-fill"></i></span>
+      All Applicants
+    </a>
+    <a class="link-button {% if request.path == '/company_profile/' %}active{% endif %}"
+      href="{% url 'company_profile' %}" type="button"> <span class="contact-info__icon"><i
+          class="bi bi-person-lines-fill"></i></span>
+    View & Update Profile
+    </a>
+    <a class=" link-button {% if request.path == '/settings/' %}active{% endif %}" type="button"
+    href="{% url 'settings' %}"> <span class="contact-info__icon"><i class="mdi mdi-account-outline"></i></span>
+    Settings
+  </a>
+  </div>
+  {% endif %}
+
+  {% endif %}
+
+</div>

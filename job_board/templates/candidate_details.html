@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% block title %} Job Listing Page {% endblock %}
+{% block content %}
+{% load static %}
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="/static/img/about.jpg" style="background-image: url(&quot;/static/img/about.jpg&quot;);">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>job details</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .candidates-cv {
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0px 5px 20px 3px rgba(230, 233, 249, .9);
+        transition: all ease .5s;
+        border-radius: 30px 0 30px 0;
+        margin-bottom: 30px;
+    }
+
+    .candidates-cv .hot-jobs-img {
+        box-shadow: none;
+    }
+
+    .candidates-cv .hot-jobs-img img {
+        border-radius: 20px 0 20px 0;
+        position: relative;
+        top: -3px;
+        height: 175px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .candidates-cv .candidates-cv-content h3 {
+        font-size: 24px;
+        margin-bottom: 8px;
+        color: #1a1a1a;
+        font-weight: bold;
+    }
+
+    .candidates-cv .candidates-cv-content .sub-title {
+        display: inline-block;
+        margin-bottom: 8px;
+    }
+
+    .candidates-cv .candidates-cv-content ul li span {
+        font-weight: bold;
+        color: #1a1a1a;
+    }
+
+    .default-btn {
+        font-size: 16px;
+        color: #fff;
+        line-height: 1;
+        transition: all ease .5s;
+        text-align: center;
+        background-color: #2042e3;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        display: inline-table;
+        padding: 15px 40px;
+        border-radius: 4px;
+    }
+
+    .candidates-cv .default-btn {
+        float: right;
+    }
+
+    .candidates-details-content {
+        background-color: #fff;
+        box-shadow: 0px 5px 20px 3px rgba(230, 233, 249, .9);
+        padding: 30px;
+        padding-bottom: 40px;
+        border-radius: 30px 0 30px 0;
+    }
+ 
+    .candidates-details-content h3 {
+        font-size: 24px;
+        color: #1a1a1a;
+        font-weight: bold;
+        margin-bottom: 15px;    margin-top: 50px;
+    }
+
+    .candidates-details-sidebar .candidates-widget {
+        margin-bottom: 35px;
+    }
+
+
+    .candidates-details-sidebar .candidates-widget h3 {
+        background-color: #1f1e86;
+        padding: 15px 30px;
+        border-radius: 10px 10px 0 0;
+        font-size: 24px;
+        margin-bottom: 0;
+        color: #ffffff;
+    }
+
+    .candidates-details-sidebar .candidates-widget .overview {
+        margin: 0;
+        list-style-type: none;
+        padding: 30px;
+        /* box-shadow: 0px 5px 20px 3px rgba(230, 233, 249, .9); */
+        background-color: 0px 5px 20px 3px rgba(230, 233, 249, .9);
+        border-radius: 0 0 10px 10px;
+        border: 1px solid #eee;
+    }
+
+
+    .overview li {
+        font-weight: 600;
+        font-size: 18px;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+    }
+
+    .overview span {
+        font-weight: normal;
+        font-size: 16px; 
+        float: right;
+        width: 165px;
+    }
+</style>
+
+<div class="clearfix"></div>
+
+<div class="job-post-company pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8">
+                <div class="candidates-cv">
+                    <div class="row align-items-center">
+                        <div class="col-lg-2">
+                            <div class="hot-jobs-img"> 
+                                {% if candidate.image %}
+                              <img src="{{candidate.image.url}}" alt="">
+                               {% else %} 
+                              <img src="/static/img/user.png" alt="Image" > 
+                               {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="candidates-cv-content">
+                                <h3>{{candidate.user.first_name}} {{candidate.user.last_name}}</h3>
+                                <span class="sub-title">UX/UI Designer</span>
+                                <ul>
+                                    <li><span>Location: </span>{{candidate.location}}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <a href="{{ applicant.cv.url }}" target="_blank" class="default-btn" download="">Download CV</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="candidates-details-content">
+                    <h3>About Me</h3>
+                    <p>{{candidate.about}}</p>
+
+                    <h3>Education</h3>
+
+                    
+                          
+                    <ul>
+                        <li class="arts"> {{candidate.education_level}}</li> 
+                    </ul>
+
+                    <h3>Work Experience</h3>
+
+                    <ul>
+                        <li class="arts"> {{candidate.work}}</li> 
+                    </ul>
+
+                     
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="col-lg-4">
+                <div class="candidates-details-sidebar">
+
+
+                    <div class="candidates-widget">
+                        <h3>Contact Information</h3>
+
+                        <ul class="overview">
+
+                            <li>
+                                Email
+                                <a href="mailto:hello@jubi.com"><span>: {{candidate.user.email}}</span></a>
+                            </li>
+                            <li>
+                                Phone
+                                <a href="tel:+1-(514)-7939-357"><span>: {{candidate.phone}}</span></a>
+                            </li>
+                            <li>
+                                Location
+                                <span>: {{candidate.location}} </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="candidates-widget">
+                        <h3>Job Overview</h3>
+
+                        <ul class="overview">
+                            
+                            <li>
+                                Experience
+                                <span>: {{candidate.work}}</span>
+                            </li>
+                            <li>
+                                Offered Salary
+                                <span>: $700</span>
+                            </li>
+                            <li>
+                                Languages:
+                                <span>: English,Malayalam</span>
+                            </li>
+                            <li>
+                                Gender
+                                <span>: {{candidate.gender}}</span>
+                            </li>
+                          
+                        </ul>
+                    </div>
+
+                    <div class="candidates-widget">
+                        <h3>Download Resume</h3>
+
+                        <ul class="overview download ">
+
+                            <li>
+                                <i class="flaticon-pdf"></i>
+                                {% if candidate.cv %}
+                                    <a href="{{ candidate.cv.url }}" target="_blank">PDF Format CV</a>
+                                {% else %}
+                                    <p>No CV uploaded</p>
+                                {% endif %}
+                            </li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

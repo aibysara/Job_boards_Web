@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block title %} Contact Page {% endblock %}
+{% block content %}
+{% load static %}
+<div class="slider-area ">
+  <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+    data-background="/static/img/about.jpg" style="background-image: url(&quot;/static/img/about.jpg&quot;);">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="hero-cap text-center text-white">
+            <h5>Apply For This Job</h5>
+            <h2>{{job.title}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="clearfix"></div>
+
+<section class="contact ">
+
+
+  <div class="container">
+
+<style>
+  
+.job-bx{
+	box-shadow: 0 0 10px 0 rgba(0,24,128,0.1);
+	padding: 20px 30px;
+}
+.job-bx h5{
+    font-weight: 700;
+    margin-bottom: 50px;
+	 
+}
+.add-btn {
+    margin-left: auto;
+    align-self: center;
+    background-color: #2e55fa;
+    max-width: 100%;
+    margin-bottom: auto;
+    padding: 10px;
+    border-radius: 6px;
+    color:#fff;
+}
+.job-bx label {
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-bottom:0 ;
+}
+.font-13 {
+    font-size: 13px;
+    font-weight: 400;
+    color: #6f6f6f;
+}
+.m-b20 {
+    margin-bottom: 20px;
+}
+.clearfix:after, .clearfix:before {
+    content: "";
+    display: table;
+}
+</style>
+
+    <div class="row">
+      <!-- <div class="col-lg-6 mx-auto mt-4  py-5 mb-4">
+
+
+        <div id="personal_details_bx" class="job-bx bg-white m-b30">
+          <div class="d-flex">
+            <h5 class="m-b30">Personal Details</h5><a class="site-button add-btn button-sm"
+              href="/react/demo/jobs-my-resume"><i class="fa fa-pencil m-r5"></i> Edit</a>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="clearfix m-b20"><label class="m-b0">Date of Birth</label><span class="clearfix font-13">31
+                  July 1998</span></div>
+              <div class="clearfix m-b20"><label class="m-b0">Gender</label><span class="clearfix font-13">male</span>
+              </div>
+              <div class="clearfix m-b20"><label class="m-b0">Marital Status</label><span
+                  class="clearfix font-13">Single / unmarried</span></div>
+              <div class="clearfix m-b20"><label class="m-b0">Passport Number</label><span class="clearfix font-13">+
+                  123 456 7890</span></div>
+              <div class="clearfix m-b20"><label class="m-b0">Differently Abled</label><span
+                  class="clearfix font-13">None</span></div>
+              <div class="clearfix m-b20"><label class="m-b0">Languages</label><span
+                  class="clearfix font-13">English</span></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="clearfix m-b20"><label class="m-b0">Permanent Address</label><span
+                  class="clearfix font-13">Add Permanent Address</span></div>
+              <div class="clearfix m-b20"><label class="m-b0">Area Pin Code</label><span
+                  class="clearfix font-13">302010</span></div>
+              <div class="clearfix m-b20"><label class="m-b0">Hometown</label><span
+                  class="clearfix font-13">Delhi</span></div>
+              <div class="clearfix m-b20"><label class="m-b0">Work permit of other country</label><span
+                  class="clearfix font-13">USA</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div> -->
+
+
+
+      <div class="col-lg-5 mx-auto mt-4  py-5 mb-4">
+
+        {% if messages %}
+        <div class="messages position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+          <div class="form-row custom-file">
+            <h4>Attach Resume</h4>
+            <span>Resume is the most important document recruiters look for. Recruiters generally do not look at
+              profiles without resumes.
+
+            </span> 
+
+            <input type="file" class="form-control mt-3" name="resume" id="resume">
+          </div>
+          <input type="submit" value="Submit" class="btn btn-danger mt-3">
+        </form>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</section>
+{% endblock %}

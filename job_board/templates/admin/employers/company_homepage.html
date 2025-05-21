@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %} Contact Page {% endblock %}
+{% block content %}
+{% load static %}
+
+
+ 
+
+<div class="clearfix"></div>
+
+
+
+
+<section class="contact">
+
+
+
+
+  <div class="container-fluid">
+
+
+    <div class="row">
+
+      {% include 'admin_sidemenu.html' %}
+
+      <div class="col-md-10 bg_color">
+        <div class="home_content_area">
+            
+          <div id="box-list">
+            <div class="box">
+              <div>
+            
+              {% if user.is_authenticated %}
+                <h2>All Vacancies</h2>
+                <h1> {{ company.job_set.count }}</h1>              
+              {% endif %}
+              
+                <span class="day-details"><i class='bx bx-up-arrow-alt'></i>Up&nbsp;form&nbsp;yesterday</span>
+              </div>  
+                <div class="card-bx"><span class="card"><span class="mdi mdi-briefcase-variant-outline"></span></span></div>  
+            </div>
+            <div class="box">
+              <div>
+                <h2>Shortlisted</h2>
+                <h1>00</h1>
+                <span class="day-details"><i class='bx bx-up-arrow-alt'></i>Up&nbsp;form&nbsp;yesterday</span>
+              </div>  
+                <div class="card-bx"><span class="card"><span class="mdi mdi-bookmark-outline"></span></span></div>  
+            </div>
+            <div class="box">
+              <div>
+                <h2>Views</h2>
+                <h1>00</h1>
+                <span class="day-details"><i class='bx bx-up-arrow-alt'></i>Up&nbsp;form&nbsp;yesterday</span>
+              </div>  
+                <div class="card-bx"><span class="card"><span class="mdi mdi-monitor-eye"></span></span></div>  
+            </div>
+            <div class="box">
+              <div>
+                <h2>Review</h2>
+                <h1>00</h1>
+                <span class="day-details"><i class='bx bx-down-arrow-alt'></i>Down&nbsp;From&nbsp;Today</span>
+              </div>  
+                <div class="card-bx"><span class="card">
+                  <span class="mdi mdi-comment-text-multiple"></span></span></div>
+            </div>
+          </div>
+
+
+        </div>
+     
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+{% endblock %}

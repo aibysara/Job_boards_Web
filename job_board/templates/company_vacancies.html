@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+{% block title %} Job Listing Page {% endblock %}
+{% block content %}
+{% load static %}
+    <div class="slider-area ">
+      <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="/static/img/about.jpg" style="background-image: url(&quot;/static/img/about.jpg&quot;);">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="hero-cap text-center">
+                <h2>Job Vacancies at <em><u>{{ company.company_name }}</u> </em></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="clearfix"></div>
+    <div class="job-listing-area pt-120 pb-120">
+      <div class="container">
+        <div class="row"> 
+          <div class="col-xl-3 col-lg-3 col-md-4">
+            <div class="row">
+              <div class="col-12">
+                <div class="small-section-tittle2 mb-45">
+                  <div class="ion"> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      width="20px" height="12px">
+                      <path fill-rule="evenodd" fill="rgb(27, 207, 107)"
+                        d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z">
+                      </path>
+                    </svg>
+                  </div>
+                  <h4>Filter Jobs</h4>
+                </div>
+              </div>
+            </div> 
+            <div class="job-category-listing mb-50"> 
+              <div class="single-listing">
+                <div class="small-section-tittle2">
+                  <h4>Job Category</h4>
+                </div> 
+                <div class="select-job-items2">
+                  <select name="select">
+                    <option value="">All Category</option>
+                    <option value="">Category 1</option>
+                    <option value="">Category 2</option>
+                    <option value="">Category 3</option>
+                    <option value="">Category 4</option>
+                  </select>
+              
+                </div> 
+                <div class="select-Categories pt-80 pb-50">
+                  <div class="small-section-tittle2">
+                    <h4>Job Type</h4>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Full Time
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Part Time
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Remote
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Freelance
+                    </label>
+                  </div>
+
+
+
+
+                </div> 
+              </div> 
+              <div class="single-listing">
+                <div class="small-section-tittle2">
+                  <h4>Job Location</h4>
+                </div> 
+                <div class="select-job-items2">
+                  <select name="select">
+                    <option value="">Anywhere</option>
+                    <option value="">Category 1</option>
+                    <option value="">Category 2</option>
+                    <option value="">Category 3</option>
+                    <option value="">Category 4</option>
+                  </select>
+           
+                </div> 
+                <div class="select-Categories pt-80 pb-50">
+                  <div class="small-section-tittle2">
+                    <h4>Experience</h4>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      1-2 Years
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      2-3 Years
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      3-6 Years
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      6-more..
+                    </label>
+                  </div>
+
+
+
+ 
+                </div> 
+              </div> 
+              <div class="single-listing"> 
+                <div class="select-Categories pb-50">
+                  <div class="small-section-tittle2">
+                    <h4>Posted Within</h4>
+                  </div>
+
+
+
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Any
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Today
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Last 2 days
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Last 3 days
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Last 5 days
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Last 10 days
+                    </label>
+                  </div>
+
+       
+
+
+               
+                </div> 
+              </div>
+             
+            </div> 
+          </div> 
+          <div class="col-xl-9 col-lg-9 col-md-8"> 
+            <section class="featured-job-area">
+              <div class="container"> 
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="count-job mb-35">
+                      <span>39, 782 Jobs found</span> 
+                      <div class="select-job-items">
+                        <span>Sort by</span>
+                        <select name="select" >
+                          <option value="">None</option>
+                          <option value="">job list</option>
+                          <option value="">job list</option>
+                          <option value="">job list</option>
+                        </select>
+                   
+                      </div> 
+                    </div>
+                  </div>
+                </div> 
+
+                <div class="container">
+         
+                    
+                    {% if jobs %}
+                    {% for job in jobs %}
+                    <!-- single-job-content -->
+                    <div class="single-job-items mb-30">
+                      <div class="job-items">
+                        <div class="company-img">
+                       
+                          <a href="/job_details/{{ job.id }}/">
+
+                           {% if job.image %}
+                           <img src="{{job.image.url}}" alt="">
+                           {% else %} 
+                          <img src="/static/img/user.png" alt="Image" > 
+                           {% endif %}
+                            
+                           
+                          
+                          </a>
+                        </div>
+                        <div class="job-tittle job-tittle2">
+                          <a href="/job_details/{{ job.id }}/">
+                            <h4>{{ job.title }}</h4>
+                          </a>
+                          <ul>
+                            <li>{{job.company.company_name}}</li>
+                            <li><i class="fas fa-map-marker-alt"></i>{{job.location}}</li>
+                            <li>₹{{job.salary}}/month</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="items-link items-link2 f-right">
+                        <a href="/job_details/{{ job.id }}/">{{job.job_type}}</a>
+                        <span>{{job.creation_date}}</span>
+                      </div>
+                    </div>
+                    <!-- single-job-content -->
+                    {% endfor %}
+                    {% else %}
+                    <p>No job vacancies available at {{ company.company_name }} at the moment.</p>
+                {% endif %}
+
+
+
+                     
+                    <a href="{% url 'employers' %}">Back to Companies</a>   
+                </div>
+           
+            
+             
+              </div>
+        
+            </section>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                
+             
+            
+              </ul>
+            </nav>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}

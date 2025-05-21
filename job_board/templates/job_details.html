@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %} Job Listing Page {% endblock %}
+{% block content %}
+{% load static %}
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="/static/img/about.jpg" style="background-image: url(&quot;/static/img/about.jpg&quot;);">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>job details</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="clearfix"></div>
+
+<div class="job-post-company pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-between">
+            <!-- Left Content -->
+            <div class="col-xl-7 col-lg-8">
+                <!-- job single -->
+                <div class="single-job-items mb-50">
+                    <div class="job-items">
+                        <div class="company-img company-img-details">
+                            <a href="#">
+                                
+                                {% if job.image %}
+                                <img src="{{job.image.url}}" alt="">
+                                {% else %} 
+                               <img src="/static/img/user.png" alt="Image" > 
+                                {% endif %}
+                                 
+                            
+                            </a>
+                        </div>
+                        <div class="job-tittle">
+                            <a href="#">
+                                <h4>{{job.title}}</h4>
+                            </a>
+                            <ul>
+                                <li>{{job.company.company_name}}</li>
+                                <li><i class="fas fa-map-marker-alt"></i>{{job.location}}</li>
+                                <li>₹{{job.salary}}/month</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- job single End -->
+
+                <div class="job-post-details">
+                    <div class="post-details1 mb-50">
+                        <!-- Small Section Tittle -->
+                        <div class="small-section-tittle">
+                            <h4>Job Description</h4>
+                        </div>
+                        <p>{{job.description}}</p>
+                    </div>
+                    <div class="post-details2  mb-50">
+                        <!-- Small Section Tittle -->
+                        <div class="small-section-tittle">
+                            <h4>Required Knowledge, Skills, and Abilities</h4>
+                        </div>
+                        <ul> 
+                            <li>{{job.skills}}</li> 
+                        </ul>
+                    </div>
+                    <div class="post-details2  mb-50">
+                        <!-- Small Section Tittle -->
+                        <div class="small-section-tittle">
+                            <h4>Education + Experience</h4>
+                        </div>
+                        <ul>
+                            <li>{{job.experience}}  or more years of professional design experience</li> 
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Right Content -->
+            <div class="col-xl-4 col-lg-4">
+                <div class="post-details3  mb-50">
+                    <!-- Small Section Tittle -->
+                    <div class="small-section-tittle">
+                        <h4>Job Overview</h4>
+                    </div>
+                    <ul>
+                        <li>Posted date : <span>{{job.start_date}}</span></li>
+                        <li>Location : <span>{{job.location}}</span></li>
+                        <li>Vacancy : <span>02</span></li>
+                        <li>Job nature : <span>{{job.job_type}}</span></li>
+                        <li>Salary : <span>₹{{job.salary}}/month</span></li>
+                        <li>End Date for Application : <span>{{job.end_date}}</span></li>
+                    </ul>
+                    <div class="apply-btn2">    
+
+                        
+                        {% if user.is_authenticated %}
+                        {% if is_applicant %}
+                            <a href="/job_apply/{{job.id}}/" class="btn  post-btn">Apply Now</a>
+                        {% else %}
+                        <a href="#" class="btn post-btn" disabled>Companies Cannot Apply</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn post-btn">Login to Apply</a>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="post-details4  mb-50">
+                    <!-- Small Section Tittle -->
+                    <div class="small-section-tittle">
+                        <h4>Company Information</h4>
+                    </div>
+                    <span>{{job.company.company_name}}</span>
+                    <p>{{job.company.description}}.</p>
+                    <ul>
+                        <li>Name: <span>{{job.company.company_name}} </span></li>
+                        <li>Web : <span> {{job.company.website}}</span></li>
+                        <li>Email: <span>{{job.company.user.email}}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

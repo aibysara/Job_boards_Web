@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %} Contact Page {% endblock %}
+{% block content %}
+{% load static %}
+
+
+
+
+<div class="clearfix"></div>
+
+
+
+
+
+<section class="contact">
+
+
+
+
+  <div class="container-fluid">
+
+
+    <div class="row">
+
+      {% include 'admin_sidemenu.html' %}
+
+      <div class="col-md-10 bg_color">
+        <div class="content_area">
+          <div class=" mt-4">
+            <h2>Applied Jobs</h2>
+
+            {% if messages %}
+        <div class="messages position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="table-responsive">
+            <table class="table table-hover" id="example">
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Job Title</th>
+                  <th>Applicant</th>
+                  <th>Applied On</th>
+                  <th>Resume</th>
+                  <th>Status</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% if applied_jobs %}
+
+                {% for application in applied_jobs %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td><a href="/job_details/{{ application.job.id }}/">{{ application.job.title }}</a></td>
+                  <td> {{ application.job.company.company_name }}</td>
+                  <td>{{ application.apply_date }}</td>
+                  <td><a href="{{application.resume.url}}" class="btn  btn-outline-primary" target="_blank"><i
+                        class="fa fa-file"></i>Resume</a></td>
+
+                  <td>
+                    <!-- Display job application status -->
+                    {% if application.status == 'accepted' %}
+                    <span class="badge bg-success">Accepted</span>
+                    {% elif application.status == 'rejected' %}
+                    <span class="badge bg-danger">Rejected</span>
+                    {% else %}
+                    <span class="badge bg-warning">Pending</span>
+                    {% endif %}
+
+                  </td>
+                  <td>
+                    <form action="{% url 'delete_applied_job' application.id %}" method="post" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this Job?');">Delete</button>
+                    </form>
+
+                  </td>
+                </tr>
+                {% endfor %}
+
+                {% else %}
+                <p>No jobs applied yet.</p>
+                {% endif %}
+              </tbody>
+            </table>
+
+</div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% load static %}
+<header>
+<nav class="navbar navbar-expand-lg bg-body-tertiary text-bg-dark" aria-label="Eleventh navbar example">
+  <div class="container">
+    <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+      <img src="{% static 'img/logo.png' %}">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
+      aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample09">
+      <ul class="navbar-nav main_navbar me-auto mb-2 mb-lg-0">
+        <li><a href="/" class="nav-link px-0">Home</a></li>
+        <li><a href="{% url 'job_listing' %}"
+            class="nav-link px-0 {% if request.path == '/job_listing/' %}active{% endif %}">Find a Job</a></li>
+
+        <li><a href="{% url 'employers' %}"
+            class="nav-link px-0 {% if request.path == '/employers/' %}active{% endif %}">Employers</a></li>
+        <li><a href="{% url 'candidates' %}"
+            class="nav-link px-0 {% if request.path == '/candidates/' %}active{% endif %}">Candidates</a></li>
+        <li><a href="{% url 'about' %}"
+            class="nav-link  px-0 {% if request.path == '/about/' %}active{% endif %}">About</a></li>
+
+        <li><a href="{% url 'contact' %}"
+            class="nav-link px-0 {% if request.path == '/contact/' %}active{% endif %}">Contact</a></li>
+      </ul>
+
+    </div>
+    <div class="col-md-2 text-end  mx-auto">
+
+      {% if user.is_authenticated %}
+      <ul class=" nav  justify-content-end">
+        <li class="nav-item dropdown">
+          <a class="btn btn-outline-light me-2  dropdown-toggle" type="button" href="#" data-bs-toggle="dropdown"
+            aria-expanded="false">
+
+            <span class="mdi mdi-account-outline"></span> </a>
+
+
+          <ul class="dropdown-menu ">
+
+            {% if user.is_authenticated %}
+            {% if is_applicant %}
+            <li> <a href="{% url 'user_homepage' %}"
+                class="list-group-item list-group-item-action d-flex gap-3  dropdown-item" aria-current="true"
+                style=" padding: 20px;  "> 
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0"> {{user.first_name }} {{user.last_name }} </h6>
+                    <p class="mb-0 opacity-75">Its Candidates </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'user_profile' %}">
+                <span class="mdi mdi-account-outline"></span>
+                View Profile
+              </a>
+            </li>
+
+            {% elif is_company %}
+            <li> <a href="{% url 'company_homepage' %}"
+                class="list-group-item list-group-item-action d-flex gap-3  dropdown-item" aria-current="true"
+                style=" padding: 20px;  "> 
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                  <div>
+                    <h6 class="mb-0">{{ user.username }} </h6>
+                    <p class="mb-0 opacity-75">Its Company </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'company_profile' %}">
+                <span class="mdi mdi-account-outline"></span>
+                View Profile
+              </a>
+            </li>
+
+            {% endif %}
+
+            {% endif %}
+          
+            <li>
+               <a class=" me-2 btn " href="{% url 'notification' %}">
+                 <span class="mdi mdi-bell"></span> Notifications
+               </a>
+             </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}">
+                <span class="mdi mdi-logout"></span>
+                logout
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+      </ul>
+      {% else %}
+      <a type="button" href="{% url 'login' %}" class="btn btn-outline-light me-2">Login / Sign-up</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+</header>

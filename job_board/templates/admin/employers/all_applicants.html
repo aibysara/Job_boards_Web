@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %} Contact Page {% endblock %}
+{% block content %}
+{% load static %}
+
+
+
+
+<div class="clearfix"></div>
+
+
+
+
+
+<section class="contact">
+
+
+
+
+  <div class="container-fluid">
+
+
+    <div class="row">
+
+      {% include 'admin_sidemenu.html' %}
+
+      <div class="col-md-10 bg_color">
+        <div class="content_area">
+          <div class=" mt-4">
+
+
+            <div class="table-responsive">
+              <table class="table table-hover" id="example">
+                <thead>
+                  <tr>
+                    <th>Sr.No</th>
+                    <th>Job Title</th>
+                    <th>Applicant</th>
+                    <th>Applied On</th>
+                    <th>Resume</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Success message if the status is updated -->
+                  {% if success %}
+                  <div class="alert alert-success">
+                    {{ success }}
+                  </div>
+                  {% endif %}
+
+                  {% for i in application %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.job }}</td>
+                    <td>{{ i.applicant }}</td>
+                    <td>{{ i.apply_date }}</td>
+                    <td>
+                      <a href="{{ i.resume.url }}" target="_blank" class="btn btn-outline-primary">
+                        <i class="fa fa-file"></i> Resume
+                      </a>
+                    </td>
+
+                    <!-- Accept/Reject buttons to submit status -->
+                    <td>
+                      <form method="POST" action="{% url 'all_applicants' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="application_id" value="{{ i.id }}">
+                        <div class="btn-group">
+                          <!-- Button to accept the application -->
+                          <button type="submit" name="status" value="accepted"
+                            class="btn btn-outline-primary {% if i.status == 'accepted' %} active {% endif %}">Accept</button>
+
+                          <!-- Button to reject the application -->
+                          <button type="submit" name="status" value="rejected"
+                            class="btn btn-outline-primary {% if i.status == 'rejected' %} active {% endif %}">Reject</button>
+                        </div>
+                      </form>
+                    </td>
+
+                    <!-- Display status icons -->
+                    <td>
+                      {% if i.status == 'accepted' %}
+                      <span class="badge bg-success">Accepted </span>
+                      {% elif i.status == 'rejected' %}
+                      <span class="badge bg-danger"> Rejected </span>
+                      {% else %}
+                      <span class="badge bg-warning">Pending</span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+
+
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

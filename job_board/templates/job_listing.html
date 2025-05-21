@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% block title %} Job Listing Page {% endblock %}
+{% block content %}
+{% load static %}
+    <div class="slider-area ">
+      <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+        data-background="/static/img/about.jpg" style="background-image: url(&quot;/static/img/about.jpg&quot;);">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="hero-cap text-center">
+                <h2>Get your job</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="clearfix"></div>
+    <div class="job-listing-area pt-120 pb-120">
+      <div class="container">
+        <div class="row"> 
+          <div class="col-xl-3 col-lg-3 col-md-4 filter">
+            <div class="row">
+              <div class="col-12">
+                <div class="small-section-tittle2 mb-45">
+                  <div class="ion"> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      width="20px" height="12px">
+                      <path fill-rule="evenodd" fill="rgb(27, 207, 107)"
+                        d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z">
+                      </path>
+                    </svg>
+                  </div>
+                  <h4>Filter Jobs</h4> 
+                </div>
+              </div>
+            </div> 
+            <div class="job-category-listing mb-50">
+              <form method="GET" action="{% url 'job_listing' %}">
+                  <div class="single-listing">
+                      <div class="select-Categories pb-50">
+                          <div class="small-section-tittle2">
+                              <h4>Job Type</h4>
+                          </div>
+                       
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="job_type" value="full" id="full"
+                            {% if 'full' in job_types %} checked {% endif %}>
+                            <label class="form-check-label" for="full">Full Time</label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="job_type" value="part" id="partTime"
+                            {% if 'part' in job_types %} checked {% endif %}>
+                            <label class="form-check-label" for="partTime">Part Time</label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="job_type" value="both" id="both"
+                            {% if 'both' in job_types %} checked {% endif %}>
+                            <label class="form-check-label" for="both">Both (Full-Time and Part-Time)</label>
+                        </div>
+                        
+
+                      </div>
+                  </div>
+          
+                  <div class="single-listing">
+                    <div class="select-Categories pb-50">
+                        <div class="small-section-tittle2">
+                            <h4>Posted Within</h4>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="posted_within" value="Any" id="postedAny"
+                            {% if 'Any' in posted_within %} checked {% endif %}   >
+                            <label class="form-check-label" for="postedAny">Any</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="posted_within" value="1" id="postedToday"
+                            {% if '1' in posted_within %} checked {% endif %}    >
+                            <label class="form-check-label" for="postedToday">Today</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="posted_within" value="2" id="posted2Days"
+                            {% if '2' in posted_within %} checked {% endif %}   >
+                            <label class="form-check-label" for="posted2Days">Last 2 days</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="posted_within" value="3" id="posted3Days"
+                            {% if '3' in posted_within %} checked {% endif %}    >
+                            <label class="form-check-label" for="posted3Days">Last 3 days</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="posted_within" value="5" id="posted5Days"
+                            {% if '5' in posted_within %} checked {% endif %}   >
+                            <label class="form-check-label" for="posted5Days">Last 5 days</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="posted_within" value="10" id="posted10Days"
+                            {% if '10' in posted_within %} checked {% endif %}    >
+                            <label class="form-check-label" for="posted10Days">Last 10 days</label>
+                        </div>
+                    </div>
+                </div>
+                 
+          
+                  <button type="submit" class="btn post-btn mt-3">Filter</button>
+              </form>
+          </div>
+           
+          </div> 
+          <div class="col-xl-9 col-lg-9 col-md-8"> 
+            <section class="featured-job-area">
+              <div class="container"> 
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="count-job mb-35">
+                      <span>39 Jobs found</span> 
+                      <div class="select-job-items">
+                        <form method="GET" action="">
+                          <label for="sort">Sort by:</label>
+                          <select name="sort" id="sort" onchange="this.form.submit()">
+                              <option value="date_posted_desc" {% if sort_option == 'date_posted_desc' %}selected{% endif %}>Newest</option>
+                              <option value="date_posted_asc" {% if sort_option == 'date_posted_asc' %}selected{% endif %}>Oldest</option>
+                              <option value="salary_desc" {% if sort_option == 'salary_desc' %}selected{% endif %}>Highest Salary</option>
+                              <option value="salary_asc" {% if sort_option == 'salary_asc' %}selected{% endif %}>Lowest Salary</option>
+                              <option value="title_asc" {% if sort_option == 'title_asc' %}selected{% endif %}>Title A-Z</option>
+                              <option value="title_desc" {% if sort_option == 'title_desc' %}selected{% endif %}>Title Z-A</option>
+                          </select>
+                      </form>
+                   
+                      </div> 
+                    </div>
+                  </div>
+                </div> 
+
+                {% for job in page_obj%}
+                <!-- single-job-content -->
+                <div class="single-job-items mb-30">
+                  <div class="job-items">
+                    <div class="company-img">
+                      <a href="/job_details/{{ job.id }}/">
+                        
+                        
+                        {% if job.image %}
+                        <img src="{{job.image.url}}" alt="">
+                        {% else %} 
+                       <img src="/static/img/user.png" alt="Image" > 
+                        {% endif %}
+                         
+                         </a>
+                    </div>
+                    <div class="job-tittle job-tittle2">
+                      <a href="/job_details/{{ job.id }}/">
+                        <h4>{{ job.title }}</h4>
+                      </a>
+                      <ul>
+                        <li>{{job.company.company_name}}</li>
+                        <li><i class="mdi mdi-map-marker"></i>{{job.location}}</li>
+                        <li>₹{{job.salary}}/month</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="items-link items-link2 f-right">
+                    <a href="/job_details/{{ job.id }}/">{{job.job_type}}</a>
+                    <span>{{job.creation_date}}</span>
+                  </div>
+                </div>
+                <!-- single-job-content -->
+                {% endfor %}
+               
+           
+            
+             
+              </div>
+        
+            </section>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                
+                <!-- Previous Page Link -->
+                {% if page_obj.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;  </span>
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link">   <span aria-hidden="true">&laquo;  </span></a>
+                  </li>
+                {% endif %}
+            
+                <!-- Page Numbers -->
+                {% for num in page_obj.paginator.page_range %}
+                  {% if page_obj.number == num %}
+                    <li class="page-item active">
+                      <a class="page-link" href="#">{{ num }} <span class="sr-only"></span></a>
+                    </li>
+                  {% else %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+            
+                <!-- Next Page Link -->
+                {% if page_obj.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}" aria-label="Next">
+                      <span aria-hidden="true"> &raquo;</span>
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link"><span aria-hidden="true"> &raquo;</span></a>
+                  </li>
+                {% endif %}
+            
+              </ul>
+            </nav>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
