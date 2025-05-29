@@ -13,7 +13,10 @@ class Applicant(models.Model):
     work = models.TextField(null=True, blank=True)
     location = models.TextField(null=True, blank=True)
     cv = models.FileField(upload_to="resumes/", null=True, blank=True)
-
+    district= models.TextField(null=True, blank=True)
+    state= models.TextField(null=True, blank=True)
+    country= models.TextField(null=True, blank=True)
+    pincode= models.TextField(null=True, blank=True)
     EDUCATION_CHOICES = [
         ('diploma', 'Diploma'),
         ('graduate', 'Graduate'),

@@ -57,7 +57,7 @@ urlpatterns = [
 
     path('company/<int:company_id>/vacancies/', views.company_vacancies, name='company_vacancies'),
    
-  
+    path('download',views.all_download,name='download')
     
  ]
 

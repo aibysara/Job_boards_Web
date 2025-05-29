@@ -1,4 +1,6 @@
 from datetime import date
+import csv
+from django.http import HttpResponse
 import logging
 from django.core.mail import send_mail
 from django.contrib import messages
@@ -770,6 +772,10 @@ def user_profile(request):
         year = request.POST['year']
         education_level = request.POST['education_level']
         location = request.POST['location']
+        district=request.POST['district']
+        state=request.POST['state']
+        country=request.POST['country']
+        pincode=request.POST['pincode']
         about = request.POST['about']
         
  
@@ -781,6 +787,10 @@ def user_profile(request):
         applicant.work = work
         applicant.year = year
         applicant.location = location
+        applicant.district=district
+        applicant.country=country
+        applicant.state=state
+        applicant.pincode=pincode
         applicant.education_level = education_level
         applicant.about = about
         applicant.save()
@@ -803,5 +813,50 @@ def user_profile(request):
     return render(request, "admin/candidates/user_profile.html", {'applicant':applicant})
 
 
+def all_download(request):
+    application_list = Application.objects.all()
 
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="applications.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow([
+        'Company', 'Job','Start Date','Deadline','Required Skills','Required Experience', 'Job Type','Work Mode',
+        'Applicant','Email', 'PassedOut Year', 'Gender', 'Phone','Education', 'Resume', 'Experience', 
+        'Candidate Place','Candidate District','Candidate State','Candidate Country','Candidate Pincode',
+        'Type','Applied On', 'Status'
+    ])
+
+    for app in application_list:
+        applicant = app.applicant
+        job=app.job
+        company=app.company
+        writer.writerow([
+            str(app.company),  # FK
+            str(app.job),     # FK
+            job.start_date,
+            job.end_date,
+            job.skills,
+            job.experience,
+            job.job_type,
+            job.work_location,
+            applicant.user.get_full_name(),  # Applicant full name from User model
+            app.applicant.user.email,   # ✅ From Applicant model
+            applicant.year,
+            applicant.gender,
+            applicant.phone,
+            applicant.education_level,
+            str(app.resume),  # File URL if resume exists
+            applicant.work,
+            applicant.location,
+            applicant.district,
+            applicant.state,
+            applicant.country,
+            applicant.pincode,
+            applicant.type,
+            app.apply_date.strftime('%Y-%m-%d') if app.apply_date else '',
+            app.status
+        ])
+
+    return response
 
